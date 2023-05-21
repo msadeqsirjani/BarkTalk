@@ -7,12 +7,6 @@
 
 BarkTalk is a ChatGPT-powered voice assistant that uses Google Text-to-Speech (TTS) and Speech-to-Text (STT) to enable natural language conversation with users in multiple languages. The app is written in Python and runs on your local machine or server. You can use BarkTalk to perform various tasks, such as playing music, searching the web, getting the weather forecast, setting reminders, and more. 
 
-## Demo
-
-Here's ademo video of BarkTalk in action:
-
-[![BarkTalk Demo](https://img.youtube.com/vi/VIDEO_ID_HERE/0.jpg)](https://www.youtube.com/watch?v=VIDEO_ID_HERE)
-
 ## Installation
 
 To use BarkTalk, you'll need to follow these steps:
