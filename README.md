@@ -55,4 +55,4 @@ BarkTalk was created by [msadeqsirjani](https://github.com/msadeqsirjani) using 
 
 ## Contact
 
-If you have any questions or feedback about BarkTalk, please feel free to contact me at [msadeqsirjani@gmail.com](mailto:msadeqsirjani@gmail.com).
+If you have any questions or feedback about BarkTalk, please feel free to contact me at [msadeqsirjani@gmail.com](mailto:m.sadeq.sirjani@gmail.com).
