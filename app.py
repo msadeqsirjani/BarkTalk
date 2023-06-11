@@ -1,8 +1,9 @@
+import io
 import os
 from uuid import uuid4
 from config import MEDIA_DIR, ALLOWED_LANGUAGES
 from utilities.file_extensions import allowed_file, get_file_extension
-from flask import Flask, send_file, jsonify, request, url_for
+from flask import Flask, send_file, jsonify, request, url_for, after_this_request
 from werkzeug.utils import secure_filename
 from voice_engine import speech_to_text, text_to_speech
 from brain_engine import gpt_engine
@@ -18,14 +19,27 @@ def download(file_name: str):
                         "message": "There is no file with this name",
                         "status": "error"}), 404
 
-    return send_file(path_or_file=file_path, as_attachment=True)
+    return_data = io.BytesIO()
+    with open(file_path, 'rb') as file:
+        return_data.write(file.read())
+
+    return_data.seek(0)
+
+    os.remove(file_path)
+
+    return send_file(path_or_file=return_data,
+                     download_name=file_name,
+                     mimetype='audio/mpeg',
+                     as_attachment=True)
+
+    # return send_file(path_or_file=file_path, as_attachment=True)
 
 
 @app.route("/supported_language")
 def supported_language():
     return jsonify({"data": ALLOWED_LANGUAGES,
                     "message": None,
-                    "status": "successs"}), 200
+                    "status": "success"}), 200
 
 
 @app.route("/ask/<language>", methods=["POST"])
@@ -59,7 +73,8 @@ def ask(language: str):
                 "answer": {
                     "text": answer_text,
                     "file_name": exact_answer_voice_name,
-                    "voice_path": url_for("download", file_name=exact_answer_voice_name, _external=True, _scheme="http")
+                    "voice_path": url_for("download", file_name=exact_answer_voice_name, _external=True,
+                                          _scheme="http")
                 }
             }
 
