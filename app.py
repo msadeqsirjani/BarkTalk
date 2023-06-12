@@ -29,7 +29,7 @@ def download(file_name: str):
 
     return send_file(path_or_file=return_data,
                      download_name=file_name,
-                     mimetype='audio/mpeg',
+                     mimetype='audio/wav',
                      as_attachment=True)
 
     # return send_file(path_or_file=file_path, as_attachment=True)
@@ -65,7 +65,7 @@ def ask(language: str):
 
             answer_text = engine.command(prompt=prompt)
 
-            exact_answer_voice_name, answer_voice_path = text_to_speech.convert(text=answer_text,
+            exact_answer_voice_name = text_to_speech.convert(text=answer_text,
                                                                                 language=language)
 
             data = {
