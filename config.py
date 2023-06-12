@@ -6,7 +6,7 @@ env.read_env('./.env')
 
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 MEDIA_DIR = os.path.join(BASE_DIR, 'media')
-ALLOWED_EXTENSIONS = [".mp3", ".wav"]
+ALLOWED_EXTENSIONS = [".wav"]
 ALLOWED_LANGUAGES = {
     "af": "Afrikaans",
     "ar": "Arabic",
