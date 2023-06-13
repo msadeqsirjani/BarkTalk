@@ -3,7 +3,7 @@ import config
 import speech_recognition as sr
 
 
-def convert(file_path: str, language: str = 'en-US') -> str:
+def convert(file_path: str, language: str = 'en') -> str:
     recognizer = sr.Recognizer()
 
     with sr.AudioFile(file_path) as src:
