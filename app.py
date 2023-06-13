@@ -61,12 +61,17 @@ def ask(language: str):
 
             os.remove(secure_file_path)
 
+            if prompt is None:
+                return jsonify({"data": None,
+                                "message": "Google Speech Recognition could not understand audio",
+                                "status": "success"}), 400
+
             engine = gpt_engine.GptEngine()
 
             answer_text = engine.command(prompt=prompt)
 
             exact_answer_voice_name = text_to_speech.convert(text=answer_text,
-                                                                                language=language)
+                                                             language=language)
 
             data = {
                 "prompt": prompt,
