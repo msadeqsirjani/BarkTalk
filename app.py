@@ -25,7 +25,7 @@ def download(file_name: str):
 
     return_data.seek(0)
 
-    os.remove(file_path)
+    # os.remove(file_path)
 
     return send_file(path_or_file=return_data,
                      download_name=file_name,
