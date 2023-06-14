@@ -71,13 +71,15 @@ def ask(language: str):
             answer_text = engine.command(prompt=prompt)
 
             exact_answer_voice_name = text_to_speech.convert(text=answer_text,
-                                                                                language=language)
+                                                             language=language)
 
             data = {
                 "prompt": prompt,
+                "prompt_language": language,
                 "answer": {
                     "text": answer_text,
                     "file_name": exact_answer_voice_name,
+                    "answer_language": language,
                     "voice_path": url_for("download", file_name=exact_answer_voice_name, _external=True,
                                           _scheme="http")
                 }
