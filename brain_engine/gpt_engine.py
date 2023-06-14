@@ -1,7 +1,6 @@
 import os
 import openai
 import asyncio
-from translator import translate
 from config import OPENAI_KEY
 
 pre_content = """Note that if you cannot answer the question which is about something you do not know such as time-sensitive information(e.g. today's weather/stock, .etc), you can only reply \"IDK\" in your response without other characters. Do not say something like As an AI language model..., I'm sorry... and etc."""
