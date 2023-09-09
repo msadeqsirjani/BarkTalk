@@ -25,7 +25,7 @@ RUN apt-get install -y libxcb-randr0-dev libxcb-xtest0-dev libxcb-xinerama0-dev 
 COPY . .
 
 # set environment variables
-ENV FLASK_APP=run.py
+ENV FLASK_APP=app.py
 ENV FLASK_ENV=production
 
 # expose the port
