@@ -5,12 +5,14 @@ from uuid import uuid4
 from config import MEDIA_DIR, ALLOWED_LANGUAGES
 from utilities.file_extensions import allowed_file, get_file_extension
 from flask import Flask, send_file, jsonify, request, url_for
+from flask_cors import CORS
 from werkzeug.utils import secure_filename
 from voice_engine import speech_to_text, text_to_speech
 from brain_engine import gpt_engine
 
 app = Flask(__name__)
 
+CORS(app=app)
 
 @app.route("/download/<file_name>")
 def download(file_name: str):
