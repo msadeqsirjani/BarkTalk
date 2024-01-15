@@ -1,0 +1,8 @@
+{
+    "disks": [
+      {
+        "name": "barktalk-api-disk",
+        "mountTo": "media"
+      }
+    ]
+  }

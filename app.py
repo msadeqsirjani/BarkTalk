@@ -14,6 +14,7 @@ app = Flask(__name__)
 
 CORS(app=app)
 
+
 @app.route("/download/<file_name>")
 def download(file_name: str):
     file_path = os.path.join(MEDIA_DIR, file_name)
@@ -28,14 +29,12 @@ def download(file_name: str):
 
     return_data.seek(0)
 
-    # os.remove(file_path)
+    os.remove(file_path)
 
     return send_file(path_or_file=return_data,
                      download_name=file_name,
                      mimetype='audio/wav',
                      as_attachment=True)
-
-    # return send_file(path_or_file=file_path, as_attachment=True)
 
 
 @app.route("/supported_language")
@@ -103,15 +102,15 @@ def ask(language: str):
 @app.route("/ask/web/<language>", methods=["POST"])
 def ask_web(language: str):
     data = request.get_json()
-    
+
     file_name = data['file_name']
     file_content = data['file_content']
 
     if file_name == "":
         return jsonify({"data": None,
                         "message": "No selected file is available",
-                        "status": "error"}), 400    
-    
+                        "status": "error"}), 400
+
     if file_name and file_content and allowed_file(file_name=file_name):
         secure_file_name = secure_filename(file_name)
         secure_file_extension = get_file_extension(file_name=secure_file_name)
@@ -137,30 +136,27 @@ def ask_web(language: str):
         answer_text = engine.command(prompt=prompt)
 
         exact_answer_voice_name = text_to_speech.convert(text=answer_text,
-                                                        language=language)
+                                                         language=language)
 
         data = {
-                "prompt": prompt,
-                "prompt_language": language,
-                "answer": {
-                    "text": answer_text,
-                    "file_name": exact_answer_voice_name,
-                    "answer_language": language,
-                    "voice_path": url_for("download", file_name=exact_answer_voice_name, _external=True, _scheme="http")
-                }
-            }   
+            "prompt": prompt,
+            "prompt_language": language,
+            "answer": {
+                "text": answer_text,
+                "file_name": exact_answer_voice_name,
+                "answer_language": language,
+                "voice_path": url_for("download", file_name=exact_answer_voice_name, _external=True, _scheme="http")
+            }
+        }
 
         return jsonify({"data": data,
                         "message": None,
-                        "status": "success"}), 200    
-
-        # return jsonify({"data": None,
-        #                 "message": "DONE",
-        #                 "status": "success"}), 200
+                        "status": "success"}), 200
     else:
         return jsonify({"data": None,
                         "message": "File type not allowed. Only mp3 and wav files are acceptable",
                         "status": "error"}), 400
+
 
 if __name__ == '__main__':
     app.run()
