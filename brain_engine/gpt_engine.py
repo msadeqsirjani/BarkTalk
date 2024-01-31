@@ -29,4 +29,4 @@ class GptEngine:
 
             return content.replace("\n", "")
         except Exception as err:
-            return print(err)
+            print(err)
